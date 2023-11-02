@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
-pragma abicoder v2;
+pragma experimental ABIEncoderV2;
 
 import "@ensdomains/ens/contracts/ENS.sol";
-import "@ensdomains/ens/contracts/ENSRegistry.sol";
 
-contract EventRegistration {
+contract EventManager {
     struct Event {
         string name;
         uint256 date;
         EventOrganizer organizer;
-        string ensName;
+        bytes32 ensNameHash;
     }
 
     struct EventOrganizer {
@@ -22,10 +21,10 @@ contract EventRegistration {
     Event[] events;
 
     mapping(address => bool) public organizers;
-    mapping(address => mapping(string => bool)) public registered;
-    mapping(address => mapping(string => bool)) public attended;
+    mapping(address => mapping(bytes32 => bool)) public registered;
+    mapping(address => mapping(bytes32 => bool)) public attended;
 
-    ENSRegistry public ens;
+    ENS public ens;
 
     event EventAdded(string name, uint256 date, string ensName, address organizer, string organizerName, string organizerEmail);
     event Registration(address indexed attendee, string eventName, uint256 eventDate, uint256 timestamp);
@@ -36,8 +35,8 @@ contract EventRegistration {
         _;
     }
 
-    constructor(address ensAddress) {
-        ens = ENSRegistry(ensAddress);
+    constructor(ENS ensAddress) {
+        ens = ensAddress;
     }
 
     function addEventWithENS(
@@ -47,8 +46,9 @@ contract EventRegistration {
         string memory organizerName,
         string memory organizerEmail
     ) public {
+        bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
         EventOrganizer memory organizer = EventOrganizer(msg.sender, organizerName, organizerEmail);
-        Event memory newEvent = Event(name, date, organizer, ensName);
+        Event memory newEvent = Event(name, date, organizer, ensNameHash);
         events.push(newEvent);
 
         emit EventAdded(name, date, ensName, msg.sender, organizerName, organizerEmail);
@@ -59,29 +59,31 @@ contract EventRegistration {
     }
 
     function register(string memory ensName) public {
-        require(!registered[msg.sender][ensName], "You are already registered for this event.");
+        require(!registered[msg.sender][keccak256(abi.encodePacked(ensName))], "You are already registered for this event.");
 
+        bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
         address eventAddress = resolveENSName(ensName);
         require(eventAddress != address(0), "Event not found.");
 
-        Event storage selectedEvent = getEventByENSName(ensName);
+        Event storage selectedEvent = getEventByENSName(ensNameHash);
         require(selectedEvent.organizer.organizerAddress == eventAddress || selectedEvent.organizer.organizerAddress == msg.sender, "You cannot register for this event.");
 
-        registered[msg.sender][ensName] = true;
+        registered[msg.sender][ensNameHash] = true;
         emit Registration(msg.sender, selectedEvent.name, selectedEvent.date, block.timestamp);
     }
 
     function confirmAttendance(string memory ensName) public {
-        Event storage selectedEvent = getEventByENSName(ensName);
-        require(selectedEvent.organizer.organizerAddress == msg.sender || attended[msg.sender][ensName], "You cannot confirm attendance for this event.");
+        bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
+        Event storage selectedEvent = getEventByENSName(ensNameHash);
+        require(selectedEvent.organizer.organizerAddress == msg.sender || attended[msg.sender][ensNameHash], "You cannot confirm attendance for this event.");
 
-        attended[msg.sender][ensName] = true;
+        attended[msg.sender][ensNameHash] = true;
         emit AttendanceConfirmed(selectedEvent.name, selectedEvent.date, msg.sender, block.timestamp);
     }
 
     function checkAttendance(string memory ensName, address attendee) public view returns (bool) {
-        Event storage selectedEvent = getEventByENSName(ensName);
-        return attended[attendee][ensName];
+        bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
+        return attended[attendee][ensNameHash];
     }
 
     function getEventsOrganizedByUser(address organizerAddress) public view returns (Event[] memory) {
@@ -103,7 +105,7 @@ contract EventRegistration {
         Event[] memory userEvents = new Event[](events.length);
         uint256 count = 0;
         for (uint256 i = 0; i < events.length; i++) {
-            if (attended[attendee][events[i].ensName]) {
+            if (attended[attendee][events[i].ensNameHash]) {
                 userEvents[count] = events[i];
                 count++;
             }
@@ -114,20 +116,14 @@ contract EventRegistration {
         return userEvents;
     }
 
-    function alternativeNameHash(string memory ensName) internal pure returns (bytes32) {
-        bytes32 hash = keccak256(abi.encodePacked(bytes32(0), keccak256(bytes(ensName))));
-        return hash;
-    }
-
-
     function resolveENSName(string memory ensName) public view returns (address) {
-        bytes32 node = alternativeNameHash(ensName);
+        bytes32 node = keccak256(abi.encodePacked(ensName));
         return ens.resolver(node);
     }
 
-    function getEventByENSName(string memory ensName) internal view returns (Event storage) {
+    function getEventByENSName(bytes32 ensName) internal view returns (Event storage) {
         for (uint256 i = 0; i < events.length; i++) {
-            if (keccak256(bytes(events[i].ensName)) == keccak256(bytes(ensName)) && events[i].organizer.organizerAddress != address(0)) {
+            if (events[i].ensNameHash == ensName && events[i].organizer.organizerAddress != address(0)) {
                 return events[i];
             }
         }

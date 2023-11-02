@@ -9,7 +9,7 @@ const hre = require("hardhat");
 async function main() {
 
   const eventManage = await hre.ethers.getContractFactory("EventManager");
-  const eventManager = await eventManage.deploy();
+  const eventManager = await eventManage.deploy('0xaeF9Bb74C09E3064477B78CfbD6FCc54397d54c7');
   await eventManager.deployed();
 
   console.log(`Contract Address: ${eventManager.address}`);
