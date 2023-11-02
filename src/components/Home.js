@@ -1,13 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Home = () => {
+const Home = ({id, setid}) => {
+
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    setid({account: ''})
+    navigate('/')
+  }
+
+  console.log(id);
+
   return (
     <div className='layout'>
       <div className='head'>
         <div className='logo'>Add<span>n</span>Attend.</div>
         <div className='but-log'>
-          <button className='but-out'>Logout</button>
+          <button onClick={logoutHandler} className='but-out'>Logout</button>
         </div>
       </div>
       <div className='opts'>

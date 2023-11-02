@@ -15,6 +15,10 @@ const CreateEvent = () => {
                     <label htmlFor="name">Name Of The Event: </label>
                     <input name="name" type="text" placeholder="Rocky's Birthday" />
                 </div>
+                <div className="form-name fitem">
+                    <label htmlFor="name">Choose an ENS Domain: </label>
+                    <input name="name" type="text" placeholder="rockyrocks.test" />
+                </div>
                 <div className="form-date fitem">
                     <label htmlFor="name">Date: </label>
                     <input name="name" type="date" />

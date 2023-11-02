@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const Landing = () => {
+const Landing = ({setid}) => {
 
-    const [data, setdata] = useState({ 
-        address: "",
-    }); 
+    const navigate = useNavigate()
 
     const buttonHandler = () => {
         if(window.ethereum){
             window.ethereum.request({method:'eth_requestAccounts'})
             .then(res => accountChangeHandler(res[0]))
+            .then(()=>navigate('/home'))
         }else{
             alert("install metamask extension!!")
         }
@@ -17,7 +17,7 @@ const Landing = () => {
 
     const accountChangeHandler = (account) => { 
         console.log(account);
-        setdata({
+        setid({
             address: account, 
         }); 
     }; 

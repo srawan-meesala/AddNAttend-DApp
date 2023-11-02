@@ -6,17 +6,21 @@ import CreateEvent from "./components/CreateEvent";
 import Attend from "./components/Attend";
 import Attended from "./components/Attended";
 import './stylesheets/home.css'
+import { useState } from "react";
 
 function App() {
+  
+  const [id, setid] = useState();
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/events" element={<Event />} />
-        <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/attend" element={<Attend />} />
-        <Route path="/attended" element={<Attended />} />
+        <Route path="/" element={<Landing setid={setid} />} />
+        <Route path="/home" element={<Home id={id} setid={setid} />} />
+        <Route path="/events" element={<Event id={id}/>} />
+        <Route path="/create-event" element={<CreateEvent id={id}/>} />
+        <Route path="/attend" element={<Attend id={id}/>} />
+        <Route path="/attended" element={<Attended id={id}/>} />
       </Routes>
     </BrowserRouter>
   )
