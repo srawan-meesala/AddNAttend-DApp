@@ -12,8 +12,8 @@ const Attend = () => {
         <div className='body'>
             <form className='form' action="" method="post">
                 <div className="form-name fitem">
-                    <label htmlFor="eve-id">Event ID: </label>
-                    <input name="eve-id" type="text" placeholder="" />
+                    <label htmlFor="eve-id">Event's ENS Domain: </label>
+                    <input name="eve-id" type="text" placeholder="sunnybeach.eth" />
                 </div>
                 <div className="form-submit fitem">
                     <button className='form-but'>Confirm Attendance</button>

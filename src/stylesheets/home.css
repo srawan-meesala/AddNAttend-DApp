@@ -55,6 +55,16 @@
     color: #0174BE;
 }
 
+.head-name {
+  position: absolute;
+  right: 20%;
+  background-color: #0C356A;
+  padding: 7px;
+  color: white;
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+}
+
 .body {
   width: 80%;
   height: 50%;
@@ -163,7 +173,6 @@
   font-size: 17px;
   width: 500px;  
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-
   font-weight: 400;
 }
 

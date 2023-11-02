@@ -6,16 +6,21 @@ const Home = ({id, setid}) => {
   const navigate = useNavigate()
 
   const logoutHandler = () => {
-    setid({account: ''})
+    setid({address: ''})
     navigate('/')
   }
+  
+  console.log('Local Storage', localStorage);
 
-  console.log(id);
+  console.log('Home',id.address);
 
   return (
     <div className='layout'>
       <div className='head'>
         <div className='logo'>Add<span>n</span>Attend.</div>
+        <div className='head-name' id='head-name'>
+          {localStorage.address}
+        </div>
         <div className='but-log'>
           <button onClick={logoutHandler} className='but-out'>Logout</button>
         </div>

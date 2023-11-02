@@ -17,6 +17,8 @@ const Landing = ({setid}) => {
 
     const accountChangeHandler = (account) => { 
         console.log(account);
+        localStorage.clear();
+        localStorage.setItem('address' , `${account}`);
         setid({
             address: account, 
         }); 

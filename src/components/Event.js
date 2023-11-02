@@ -2,7 +2,10 @@ import React from 'react'
 import NotFound from './NotFound'
 import EachEvent from './EachEvent'
 
-const Event = () => {
+const Event = ({id}) => {
+
+  
+
   return (
     <div className='layout-eve'>
       <div className='head-1'>
