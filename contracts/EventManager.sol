@@ -60,7 +60,7 @@ contract EventManager {
 
     function register(string memory ensName) public {
         bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
-        require(!registered[msg.sender][ensNameHash], "You are already registered for this event.");
+        require(!registered[msg.sender][ensNameHash], "You already registered for this event.");
 
         address eventAddress = resolveENSName(ensName);
         require(eventAddress != address(0), "Event not found.");
