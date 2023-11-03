@@ -1,8 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect }  from 'react'
 import NotFound from './NotFound'
-import AttendedEvent from './AttendedEvent'
+import { ethers } from 'ethers';
+import { providers } from 'ethers';
+import EventManager from '../contract/EventManager.json';
+import AttendedEvent from './AttendedEvent';
 
 const Attended = () => {
+
+  const [data, setData] = useState([]);
+
+  const contractAddress = '0xB69c540Ac35A62D2D72cedFAD3a0644611b0AFDD';
+  const contractABI = EventManager.abi;
+  const provider = new providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/mpxyHBRCqlXiWu1z20mwQxm_7-n3SmWN');
+  const contract = new ethers.Contract(contractAddress, contractABI, provider);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await contract.getEventsAttendedByUser(localStorage.address);
+        setData(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className='layout-eve'>
       <div className='head-1'>
@@ -18,10 +43,13 @@ const Attended = () => {
         <div className="eve-head">
           Your Events.
         </div>
-        <NotFound />
-        <AttendedEvent />
-        <AttendedEvent />
-        <AttendedEvent />
+        {data.length === 0 ? (
+          <NotFound />
+        ) : (
+          data.map((event, index) => (
+            <AttendedEvent key={index} eventData={event} />
+          ))
+        )}
       </div>
     </div>
   )
