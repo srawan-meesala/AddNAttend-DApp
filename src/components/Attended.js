@@ -9,7 +9,7 @@ const Attended = () => {
 
   const [data, setData] = useState([]);
 
-  const contractAddress = '0xB69c540Ac35A62D2D72cedFAD3a0644611b0AFDD';
+  const contractAddress = '0xF9e887258c006222276005Dc741379cf9aCE9E05';
   const contractABI = EventManager.abi;
   const provider = new providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/mpxyHBRCqlXiWu1z20mwQxm_7-n3SmWN');
   const contract = new ethers.Contract(contractAddress, contractABI, provider);

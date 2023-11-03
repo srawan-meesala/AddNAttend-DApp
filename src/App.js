@@ -7,6 +7,7 @@ import Attend from "./components/Attend";
 import Attended from "./components/Attended";
 import './stylesheets/home.css'
 import { useState } from "react";
+import Registered from "./components/Registered";
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
         <Route path="/events" element={<Event />} />
         <Route path="/create-event" element={<CreateEvent id={id}/>} />
         <Route path="/attend" element={<Attend id={id}/>} />
-        <Route path="/attended" element={<Attended id={id}/>} />
+        <Route path="/attended" element={<Attended />} />
+        <Route path="/registered" element={<Registered />} />
       </Routes>
     </BrowserRouter>
   )

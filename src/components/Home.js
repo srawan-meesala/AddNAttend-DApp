@@ -29,7 +29,8 @@ const Home = ({id, setid}) => {
       <div className='opts'>
         <div className='opt'><Link className='opt-a' to='/events'>Your Events</Link></div>
         <div className='opt'><Link className='opt-a' to='/create-event'>Create New Event</Link></div>
-        <div className='opt'><Link className='opt-a' to='/attend'>Confirm Attendance For An Event</Link></div>
+        <div className='opt'><Link className='opt-a' to='/attend'>Register For An Event</Link></div>
+        <div className='opt'><Link className='opt-a' to='/registered'>Registered Events</Link></div>
         <div className='opt'><Link className='opt-a' to='/attended'>Previously Attended Events</Link></div>
       </div>
       <div className='dummy-1' />

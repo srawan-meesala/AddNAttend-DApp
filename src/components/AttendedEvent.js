@@ -13,9 +13,6 @@ const AttendedEvent = () => {
           <div className="loc">
             <span>Location:</span>
           </div>
-          <div className="attendees">
-            <span>Number Of Attendees Attended:</span>
-          </div>
         </div>
     </>
   )

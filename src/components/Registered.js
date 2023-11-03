@@ -1,11 +1,11 @@
 import React, { useState, useEffect }  from 'react'
 import NotFound from './NotFound'
-import EachEvent from './EachEvent'
 import { ethers } from 'ethers';
 import { providers } from 'ethers';
 import EventManager from '../contract/EventManager.json';
+import AttendedEvent from './AttendedEvent';
 
-const Event = () => {
+const Registered = () => {
 
   const [data, setData] = useState([]);
 
@@ -17,7 +17,7 @@ const Event = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await contract.getEventsOrganizedByUser(localStorage.address);
+        const result = await contract.getEventsRegisteredByUser(localStorage.address);
         setData(result);
       } catch (error) {
         console.error(error);
@@ -26,8 +26,7 @@ const Event = () => {
 
     fetchData();
   }, []);
-  
-  console.log(data);
+
 
   return (
     <div className='layout-eve'>
@@ -48,7 +47,7 @@ const Event = () => {
           <NotFound />
         ) : (
           data.map((event, index) => (
-            <EachEvent key={index} eventData={event} />
+            <AttendedEvent key={index} eventData={event} />
           ))
         )}
       </div>
@@ -56,4 +55,4 @@ const Event = () => {
   )
 }
 
-export default Event
+export default Registered

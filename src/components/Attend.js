@@ -19,7 +19,7 @@ const Attend = () => {
                     <input name="eve-id" type="text" placeholder="sunnybeach.eth" />
                 </div>
                 <div className="form-submit fitem">
-                    <button className='form-but'>Confirm Attendance</button>
+                    <button className='form-but'>Check for Events</button>
                 </div>
             </form>
         </div>

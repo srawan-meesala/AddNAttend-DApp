@@ -1,4 +1,5 @@
 import React from 'react'
+import RegisteredUser from './RegisteredUser'
 
 const EachEvent = () => {
   return (
@@ -13,11 +14,12 @@ const EachEvent = () => {
           <div className="loc">
             <span>Location:</span>
           </div>
-          <div className="attendees">
-            <span>Number Of Attendees:</span>
+          <div className="register-list">
+            <span>Registered Users:</span>
+            <RegisteredUser />
           </div>
           <div className="attendees-list">
-            <span>List Of Attendees:</span>
+            <span>Attendees: </span>
           </div>
         </div>
     </>
