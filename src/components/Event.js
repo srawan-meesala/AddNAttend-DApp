@@ -25,14 +25,17 @@ const Event = () => {
     };
 
     fetchData();
-  }, []); // Add an empty dependency array to run the effect only once
-
+  }, []);
+  
   console.log(data);
 
   return (
     <div className='layout-eve'>
       <div className='head-1'>
         <div className='logo'>Add<span>n</span>Attend.</div>
+        <div className='head-name' id='head-name'>
+          {localStorage.address}
+        </div>
         <div className='but-log'>
           <button className='but-out'>Logout</button>
         </div>

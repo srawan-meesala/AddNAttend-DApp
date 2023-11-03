@@ -5,6 +5,9 @@ const Attend = () => {
     <div className='layout'>
         <div className='head'>
             <div className='logo'>Add<span>n</span>Attend.</div>
+            <div className='head-name' id='head-name'>
+                {localStorage.address}
+            </div>
             <div className='but-log'>
                 <button className='but-out'>Logout</button>
             </div>
