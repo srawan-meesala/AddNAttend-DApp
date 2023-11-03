@@ -9,7 +9,7 @@ import './stylesheets/home.css'
 import { useState } from "react";
 
 function App() {
-  
+
   const [id, setid] = useState();
 
   return (
@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing setid={setid} />} />
         <Route path="/home" element={<Home id={id} setid={setid} />} />
-        <Route path="/events" element={<Event id={id}/>} />
+        <Route path="/events" element={<Event />} />
         <Route path="/create-event" element={<CreateEvent id={id}/>} />
         <Route path="/attend" element={<Attend id={id}/>} />
         <Route path="/attended" element={<Attended id={id}/>} />

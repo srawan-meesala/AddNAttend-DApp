@@ -6,6 +6,7 @@ const Home = ({id, setid}) => {
   const navigate = useNavigate()
 
   const logoutHandler = () => {
+    localStorage.clear();
     setid({address: ''})
     navigate('/')
   }
