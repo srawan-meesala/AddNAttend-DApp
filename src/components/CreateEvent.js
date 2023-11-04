@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import EventManager from '../contract/EventManager.json';
+import isENSNameAvailable from './isENSNameAvailable';
 
 const { ethereum } = window;
 
@@ -10,7 +11,6 @@ const CreateEvent = () => {
     ensDomain: '',
     date: '',
     time: '',
-    location: '',
   });
 
   const [error, setError] = useState('');
@@ -31,12 +31,21 @@ const CreateEvent = () => {
         ensDomain,
         date,
         time,
-        location,
       } = formData;
 
-      if (!name || !ensDomain || !date || !time || !location) {
+      if (!name || !ensDomain || !date || !time) {
         setError('All fields are required.');
         return;
+      }
+
+      // Check if ENS name is available
+      const isAvailable = await isENSNameAvailable(ensDomain);
+
+      if (!isAvailable) {
+        setError('The ENS name is already registered.');
+        return;
+      }else{
+        console.log("available");
       }
 
       // Ensure that the user is connected to an Ethereum provider.
@@ -51,6 +60,7 @@ const CreateEvent = () => {
       // Connect to the Ethereum provider.
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
+      console.log(signer);
 
       // Get the contract instance.
       const contractAddress = '0x5Fd559d0c2B387e9F6b48EA3E13282DA931ffb9a';
@@ -63,8 +73,10 @@ const CreateEvent = () => {
       // Estimate gas price.
       const gasPrice = await provider.getGasPrice();
 
+      console.log(name, ensDomain, dateTime);
+
       // Call the createEvent function in the contract with estimated gas price.
-      const transaction = await contract.addEventWithENS(name, ensDomain, dateTime, {
+      const transaction = await contract.addEventWithENS(name, dateTime, ensDomain, {
         gasPrice: gasPrice,
       });
       const receipt = await transaction.wait();
@@ -78,7 +90,6 @@ const CreateEvent = () => {
         ensDomain: '',
         date: '',
         time: '',
-        location: '',
       });
     } catch (error) {
       console.error('Error creating the event:', error);
