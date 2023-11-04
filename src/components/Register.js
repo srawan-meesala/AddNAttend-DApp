@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { ethers } from 'ethers';
 import { providers } from 'ethers';
 import EventManager from '../contract/EventManager.json';
-
+// import path from 'path'
+// require('dotenv').config()
+// import 'dotenv/config';
 
 const Register = () => {
     const [ensAddress, setEnsAddress] = useState('');
