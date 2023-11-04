@@ -9,9 +9,9 @@ const Registered = () => {
 
   const [data, setData] = useState([]);
 
-  const contractAddress = '0xD596bD5fd6173e8553263278d808E143D08A1C3b';
+  const contractAddress = '0x5Fd559d0c2B387e9F6b48EA3E13282DA931ffb9a';
   const contractABI = EventManager.abi;
-  const provider = new providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/mpxyHBRCqlXiWu1z20mwQxm_7-n3SmWN');
+  const provider = new providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/rvcpVcnAm-_S_3Twu0P9BWgm81YE4mNp');
   const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
   useEffect(() => {
