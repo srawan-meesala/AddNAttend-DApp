@@ -70,4 +70,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-Contract Address: 0x5Fd559d0c2B387e9F6b48EA3E13282DA931ffb9a
+ENS Address: 0xdA3A81F311f4DC643C3F156E544ceA91c98665F0
+Contract Address: 0x842c15a526FE407D6c6620acf584430cd5a4DBCC

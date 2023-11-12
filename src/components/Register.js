@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const [gasPrice, setGasPrice] = useState(0); // State to store the estimated gas price.
 
-  const contractAddress = '0x5Fd559d0c2B387e9F6b48EA3E13282DA931ffb9a';
+  const contractAddress = '0x842c15a526FE407D6c6620acf584430cd5a4DBCC';
   const contractABI = EventManager.abi;
 
   const fetchGasPrice = async () => {

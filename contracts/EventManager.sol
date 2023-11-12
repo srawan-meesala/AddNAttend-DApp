@@ -28,6 +28,7 @@ contract EventManager {
     event EventAdded(string name, uint256 date, string ensName, address organizer);
     event Registration(address indexed attendee, string eventName, uint256 eventDate, uint256 timestamp);
     event AttendanceConfirmed(string eventName, uint256 eventDate, address attendee, uint256 timestamp);
+    event OrganizerAdded(address organizer);
 
     modifier onlyOrganizer() {
         require(organizers[msg.sender], "Only organizers can perform this action.");
@@ -45,8 +46,12 @@ contract EventManager {
     ) public {
         bytes32 ensNameHash = keccak256(abi.encodePacked(ensName));
         EventOrganizer memory organizer = EventOrganizer(msg.sender);
-        address eventAddress = resolveENSName(ensName);
-        require(eventAddress != address(0), "ENS name does not resolve to an address.");
+
+        // Check if the sender is already an organizer; if not, become one.
+        if (!organizers[msg.sender]) {
+            organizers[msg.sender] = true;
+            emit OrganizerAdded(msg.sender);
+        }
 
         Event memory newEvent = Event(name, date, organizer, ensNameHash);
         events.push(newEvent);
@@ -89,6 +94,7 @@ contract EventManager {
     }
 
     function getEventsOrganizedByUser(address organizerAddress) public view returns (Event[] memory) {
+        require(organizers[organizerAddress], "Not a valid organizer address.");
         Event[] memory userEvents = new Event[](events.length);
         uint256 count = 0;
         for (uint256 i = 0; i < events.length; i++) {

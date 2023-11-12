@@ -5,10 +5,26 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.7.0",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.17",
+        settings: {},
+      },
+      {
+        version: "0.8.4",
+        settings: {},
+      },
+      {
+        version: "0.7.0",
+        settings: {},
+      },
+      // Add more compiler versions as needed
+    ],
+  },
   networks: {
-    Sepolia: {
-      url: "https://eth-sepolia.g.alchemy.com/v2/rvcpVcnAm-_S_3Twu0P9BWgm81YE4mNp",
+    goerli: {
+      url: "https://eth-goerli.g.alchemy.com/v2/ielVay6fs3uDtGEDfAKbpa8lG1TpOBoo",
       accounts: [PRIVATE_KEY]
     }
   }
