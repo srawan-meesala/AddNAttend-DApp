@@ -35,9 +35,6 @@ const EachEvent = ({key, eventData}) => {
     <>
         <div className='none'>{key}</div>
         <div className="event">
-          <div className="name">
-            <span>Name: </span>{eventData.name}
-          </div>
           <div className="start">
             <span>Start Date: </span>{dateString1}
           </div>
