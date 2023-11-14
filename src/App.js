@@ -3,11 +3,10 @@ import Home from "./components/Home";
 import Event from "./components/Event";
 import Landing from "./components/Landing";
 import CreateEvent from "./components/CreateEvent";
-import Attended from "./components/Attended";
 import './stylesheets/home.css'
 import { useState } from "react";
-import Registered from "./components/Registered";
 import Register from "./components/Register";
+import CheckIn from "./components/CheckIn";
 
 function App() {
 
@@ -21,8 +20,7 @@ function App() {
         <Route path="/events" element={<Event />} />
         <Route path="/create-event" element={<CreateEvent id={id}/>} />
         <Route path="/register" element={<Register id={id}/>} />
-        <Route path="/attended" element={<Attended />} />
-        <Route path="/registered" element={<Registered />} />
+        <Route path="/checkin" element={<CheckIn />} />
       </Routes>
     </BrowserRouter>
   )

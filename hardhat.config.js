@@ -16,7 +16,15 @@ module.exports = {
         settings: {},
       },
       {
+        version: "0.8.0",
+        settings: {},
+      },
+      {
         version: "0.7.0",
+        settings: {},
+      },
+      {
+        version: "0.5.0",
         settings: {},
       },
       // Add more compiler versions as needed

@@ -4,9 +4,9 @@ import AddnAttend from '../contract/AddnAttend.json';
 
 const { ethereum } = window;
 
-const Register = () => {
+const CheckIn = ({ id }) => {
   const [ensAddress, setEnsAddress] = useState('');
-  const [registrationStatus, setRegistrationStatus] = useState('');
+  const [userAddress, setUserAddress] = useState('');
   const [error, setError] = useState('');
   const [gasPrice, setGasPrice] = useState(0);
 
@@ -43,14 +43,12 @@ const Register = () => {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, contractABI, signer);
-      console.log(ens);
       const transaction = await contract.registerToEvent(ens, {
         gasPrice: ethers.utils.parseUnits(gasPrice, 'wei'), // Use the estimated gas price.
       });
       const receipt = await transaction.wait();
-      setRegistrationStatus(`Registered for event with ENS address: ${ens}`);
       console.log('Transaction receipt:', receipt);
-      alert('Registered Successfully');
+      alert('Check In Successful.');
     } catch (error) {
       console.error('Error interacting with contract:', error);
       setError(`Error registering for the event: ${error.message}`);
@@ -62,12 +60,14 @@ const Register = () => {
     }
   };
 
+  console.log(error);
+
   return (
     <div className='layout'>
       <div className='head'>
         <div className='logo'>Add<span>n</span>Attend.</div>
           <div className='head-name' id='head-name'>
-            {localStorage.address}
+            { id }
           </div>
           <div className='but-log'>
             <button className='but-out'>Logout</button>
@@ -84,16 +84,21 @@ const Register = () => {
               value={ensAddress}
               onChange={(e) => setEnsAddress(e.target.value)}
             />
+            <label htmlFor="user-address">Address of the Attendee: </label>
+            <input
+              name="user-address"
+              type="text"
+              placeholder="0x00000000"
+              value={userAddress}
+              onChange={(e) => setUserAddress(e.target.value)}
+            />
           </div>
           <div className="form-submit fitem">
             <button className='form-but' type="button" onClick={handleRegister}>
-              Register
+              CheckIn and Offer Reward
             </button>
           </div>
         </form>
-
-        {error && <div className="error-message">{error}</div>}
-        {registrationStatus && <div className="success-message">{registrationStatus}</div>}
 
         <div className="gas-price">
           Estimated Gas Price: {ethers.utils.formatUnits(gasPrice, 'wei')} Gwei
@@ -103,4 +108,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default CheckIn;
