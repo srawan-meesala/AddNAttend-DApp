@@ -69,6 +69,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+### Clone or Fork this Repo
 
-Token Address: 0xF25E5C560DFCD25fCb79D2c7a6383BDA57F9a5D7
+Use the command `npx install` in the root directory and then `npm start` to start the react app.
+
+Token Address: 0xF25E5C560DFCD25fCb79D2c7a6383BDA57F9a5D7<br/>
 Contract Address: 0x9da79b71523E2700Eb0B14c47e67cC82Bed11750
