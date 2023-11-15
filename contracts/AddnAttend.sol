@@ -34,6 +34,7 @@ contract AddnAttend is Ownable{
         EventAttendance[] _participants;
         uint256 _tokenRewardAmount; // Add underscore to the variable name
         bytes32 eventDomain;
+        string _eventDomain;
     }
 
     event EventEvent(Event _event);
@@ -76,6 +77,7 @@ contract AddnAttend is Ownable{
 
         events[_eventId]._id = _eventId;
         events[_eventId]._name = _name;
+        events[_eventId]._eventDomain = _eventDomain;
         events[_eventId]._seats = _seats;
         events[_eventId]._owner = msg.sender;
         events[_eventId]._startTime = _startTime;

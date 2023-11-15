@@ -9,7 +9,7 @@ const Event = () => {
   const [error, setError] = useState('');
   const [userAddress, setUserAddress] = useState('');
 
-  const contractAddress = '0x355B2B942FAA01F96D942aEB8AE4b3874B74a7C0';
+  const contractAddress = '0x9da79b71523E2700Eb0B14c47e67cC82Bed11750';
   const contractABI = AddnAttend.abi;
 
   useEffect(() => {
