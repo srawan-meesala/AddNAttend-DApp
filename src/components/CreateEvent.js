@@ -54,7 +54,7 @@ const CreateEvent = () => {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
 
-      const contractAddress = '0x9da79b71523E2700Eb0B14c47e67cC82Bed11750';
+      const contractAddress = '0x1325e61d31B7E3d449648922eC2a9553F2733592';
       const contractABI = AddnAttend.abi;
       const contract = new ethers.Contract(contractAddress, contractABI, signer);
 

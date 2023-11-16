@@ -7,6 +7,7 @@ import './stylesheets/home.css'
 import { useState } from "react";
 import Register from "./components/Register";
 import CheckIn from "./components/CheckIn";
+import Balance from "./components/Balance";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/create-event" element={<CreateEvent id={id}/>} />
         <Route path="/register" element={<Register id={id}/>} />
         <Route path="/checkin" element={<CheckIn />} />
+        <Route path="/balance" element={<Balance id={id} setid={setid} />} />
       </Routes>
     </BrowserRouter>
   )

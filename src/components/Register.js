@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const [gasPrice, setGasPrice] = useState(0);
 
-  const contractAddress = '0x9da79b71523E2700Eb0B14c47e67cC82Bed11750';
+  const contractAddress = '0x1325e61d31B7E3d449648922eC2a9553F2733592';
   const contractABI = AddnAttend.abi;
 
   const fetchGasPrice = async () => {

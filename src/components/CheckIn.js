@@ -10,12 +10,11 @@ const CheckIn = ({ id }) => {
   const [error, setError] = useState('');
   const [gasPrice, setGasPrice] = useState(0);
 
-  const contractAddress = '0x9da79b71523E2700Eb0B14c47e67cC82Bed11750';
+  const contractAddress = '0x1325e61d31B7E3d449648922eC2a9553F2733592';
   const contractABI = AddnAttend.abi;
 
   const fetchGasPrice = async () => {
     try {
-      // Use the Ethereum provider to fetch the current gas price.
       const provider = new ethers.providers.Web3Provider(ethereum);
       const currentGasPrice = await provider.getGasPrice();
       setGasPrice(currentGasPrice.toString());
@@ -43,7 +42,7 @@ const CheckIn = ({ id }) => {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, contractABI, signer);
-      const transaction = await contract.registerToEvent(ens, {
+      const transaction = await contract.checkInEventParticipant2(ens, userAddress, {
         gasPrice: ethers.utils.parseUnits(gasPrice, 'wei'), // Use the estimated gas price.
       });
       const receipt = await transaction.wait();
@@ -66,9 +65,6 @@ const CheckIn = ({ id }) => {
     <div className='layout'>
       <div className='head'>
         <div className='logo'>Add<span>n</span>Attend.</div>
-          <div className='head-name' id='head-name'>
-            { id }
-          </div>
           <div className='but-log'>
             <button className='but-out'>Logout</button>
           </div>

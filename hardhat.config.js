@@ -16,6 +16,10 @@ module.exports = {
         settings: {},
       },
       {
+        version: "0.8.20",
+        settings: {},
+      },
+      {
         version: "0.8.0",
         settings: {},
       },
@@ -26,8 +30,7 @@ module.exports = {
       {
         version: "0.5.0",
         settings: {},
-      },
-      // Add more compiler versions as needed
+      }
     ],
   },
   networks: {

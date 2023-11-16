@@ -73,5 +73,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Use the command `npx install` in the root directory and then `npm start` to start the react app.
 
-Token Address: 0xF25E5C560DFCD25fCb79D2c7a6383BDA57F9a5D7<br/>
-Contract Address: 0x9da79b71523E2700Eb0B14c47e67cC82Bed11750
+Token Address: 0xc9C3cB8178ae4983D720322E65eAce0F4fB28756 <br />
+Contract Address: 0x1325e61d31B7E3d449648922eC2a9553F2733592

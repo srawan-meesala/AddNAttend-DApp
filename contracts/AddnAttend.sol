@@ -11,7 +11,6 @@ contract AddnAttend is Ownable{
         uint256[] events;
     }
 
-
     struct EventAttendance {
         address userAddress;
         bool attended;
@@ -116,6 +115,10 @@ contract AddnAttend is Ownable{
 
     function getBalance() public view returns (uint256) {
         return myToken.balanceOf(msg.sender);
+    }
+
+    function getBalance2(address user) public view returns (uint256) {
+        return myToken.balanceOf(user);
     }
 
     function cancelEvent(uint256 _eventId) public {

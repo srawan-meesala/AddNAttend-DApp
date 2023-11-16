@@ -30,6 +30,7 @@ const EachEvent = ({key, eventData}) => {
   }
   console.log("start" + hours2 + ':' + min2);
   const timeString2 = hours2 +' : '+min2;
+  var participantsList = eventData._participants
 
   return (
     <>
@@ -38,18 +39,29 @@ const EachEvent = ({key, eventData}) => {
           <div className="name">
             <span>Name: </span>{eventData._name}
           </div>
-          <div className="start">
-            <span>Start Date: </span>{dateString1}
+          <div className="name">
+            <span>Domain Name: </span>{eventData[10]}
           </div>
           <div className="start">
-            <span>Start Time: </span>{timeString1}
+            <span>Start Date and Time: </span>{dateString1}&nbsp;&nbsp;{timeString1}
           </div>
           <div className="start">
-            <span>End Date: </span>{dateString2}
+            <span>End Date and Time: </span>{dateString2}&nbsp;&nbsp;{timeString2}
           </div>
           <div className="start">
-            <span>End Time: </span>{timeString2}
+            <span>Number Of Participants: </span>{participantsList.length}
           </div>
+          {participantsList.length === 0 ? (
+            <div className="start">
+              No Participants found.
+            </div>
+          ) : (
+            participantsList.map((event, index) => (
+              <div className="start">
+                <span>Participant Address {index+1}: </span>{participantsList[index][0]} &nbsp; <span>{participantsList[index][1] && "Checked In"} {!participantsList[index][1] && "Haven't Attended yet"}</span>
+              </div>
+            ))
+          )}
         </div>
     </>
   )
